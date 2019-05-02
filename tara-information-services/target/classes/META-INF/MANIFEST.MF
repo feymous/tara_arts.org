@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: tara-arts-academy
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: vs40
+Implementation-Vendor-Id: com.organization.tara
+Build-Jdk: 1.8.0_121
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/tara-information-services
+Created-By: Maven Integration for Eclipse
+
