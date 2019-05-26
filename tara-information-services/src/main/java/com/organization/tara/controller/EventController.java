@@ -24,13 +24,11 @@ public class EventController {
 
 	@GetMapping(path = "/") // Map ONLY GET Requests
 	public @ResponseBody List<Event> getEvents( @RequestParam String period,
-			@RequestParam int limit, @RequestParam int skip, @RequestParam Date fromDate, @RequestParam Date toDate) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
+			@RequestParam int size, @RequestParam int page, @RequestParam Date fromDate, @RequestParam Date toDate) {
 		List<Event> events = new ArrayList<>();
 
-		if (limit != 0 && skip >= 0) {
-			events = eventService.getEvents(limit, skip);
+		if (size != 0 && page >= 0) {
+			events = eventService.getEvents(page, size);
 		} else if (period != null) {
 			events = eventService.getEvents(period);
 		} else if (fromDate != null) {
@@ -44,10 +42,6 @@ public class EventController {
 	
 	@GetMapping(path = "/{eventId}") // Map ONLY GET Requests
 	public @ResponseBody Event getEvent(@PathVariable(required = true) int eventId) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
-		
-
 		return eventService.getEvent(eventId);
 	}
 }

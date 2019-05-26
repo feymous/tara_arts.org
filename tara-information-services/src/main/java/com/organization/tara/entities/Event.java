@@ -37,7 +37,7 @@ public class Event {
 	private String venue;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "broucher", referencedColumnName="id")
 	private Image broucher;
 
 	private boolean registrationOpen;

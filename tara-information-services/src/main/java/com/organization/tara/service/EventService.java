@@ -12,7 +12,7 @@ public interface EventService {
 
 	List<Event> getEvents(String period);
 
-	List<Event> getEvents(int limit, int skip);
+	List<Event> getEvents(int page, int size);
 
 	List<Event> getEvents(Date fromDate, Date toDate);
 
