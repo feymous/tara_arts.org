@@ -20,4 +20,6 @@ public interface EventService {
 
 	List<Event> getEvents();
 
+	List<Event> getEvents(Date fromDate, Date toDate, int page, int size);
+
 }

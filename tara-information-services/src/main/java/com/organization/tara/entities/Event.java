@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -23,25 +25,30 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int eventId;
+	@Column(name = "first_name")
+	private String firstName;
+	@Column(name = "last_name")
+	private String lastName;
 
-	private String name;
-
+	@Column(length = 1000)	
 	private String description;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMdd HH:mm", timezone="IST")
 	private Date startTime;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMdd HH:mm", timezone="IST")
 	private Date endTime;
 
-	private String type;
-
+	@Column(length = 1000)
 	private String venue;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "broucher", referencedColumnName="id")
+	@JoinColumn(name = "broucher", referencedColumnName = "id")
 	private Image broucher;
 
 	private boolean registrationOpen;
 
+	@Column(length = 1000)
 	private String guidelines;
 
 	@OneToMany(mappedBy = "event")

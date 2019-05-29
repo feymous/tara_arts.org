@@ -3,6 +3,7 @@ package com.organization.tara.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ public class EventController {
 	private EventService eventService;
 
 	@GetMapping(path = "/") // Map ONLY GET Requests
-	public @ResponseBody List<Event> getEvents( @RequestParam String period,
-			@RequestParam int size, @RequestParam int page, @RequestParam Date fromDate, @RequestParam Date toDate) {
+	public @ResponseBody List<Event> getEvents( @RequestParam(required = false) String period,
+			@RequestParam(required = false) int size, @RequestParam(required = false) int page, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate) {
 		List<Event> events = new ArrayList<>();
 
 		if (size != 0 && page >= 0) {

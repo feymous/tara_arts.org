@@ -1,11 +1,12 @@
 package com.organization.tara;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.organization.tara.controller", "com.organization.tara.repository" ,"com.organization.tara.service", "com.organization.tara.service.impl"})
 public class MainApplication {
 
 	public static void main(String[] args) {

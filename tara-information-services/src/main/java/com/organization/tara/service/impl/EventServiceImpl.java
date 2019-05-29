@@ -1,4 +1,4 @@
-package com.organization.tara.serviceImpl;
+package com.organization.tara.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -33,9 +33,9 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<Event> getEvents(Date fromDate, Date toDate) {
+	public List<Event> getEvents(Date fromDate, Date toDate, int page, int size) {
 		// TODO Auto-generated method stub
-
+		eventRepository.getEvents(fromDate, toDate, PageRequest.of(page, size));
 		return null;
 	}
 
@@ -48,6 +48,12 @@ public class EventServiceImpl implements EventService {
 	public List<Event> getEvents() {
 
 		return eventRepository.findAll();
+	}
+
+	@Override
+	public List<Event> getEvents(Date fromDate, Date toDate) {
+		
+		return eventRepository.getEvents(fromDate, toDate);
 	}
 
 }
