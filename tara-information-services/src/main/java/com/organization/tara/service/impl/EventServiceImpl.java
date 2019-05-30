@@ -27,16 +27,15 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> getEvents(int page, int size) {
 		
-		Page<Event> events = eventRepository.findAll(PageRequest.of(page, size));;
-
+		Page<Event> events = eventRepository.findAll(PageRequest.of(page, size));
 		return null;
 	}
 
 	@Override
 	public List<Event> getEvents(Date fromDate, Date toDate, int page, int size) {
 		// TODO Auto-generated method stub
-		eventRepository.getEvents(fromDate, toDate, PageRequest.of(page, size));
-		return null;
+		return eventRepository.getEvents(fromDate, toDate, PageRequest.of(page, size));
+		
 	}
 
 	@Override
