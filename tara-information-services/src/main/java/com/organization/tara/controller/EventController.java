@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,6 @@ public class EventController {
 
 	@Autowired
 	private EventService eventService;
-	
 
 	@GetMapping(path = "/") // Map ONLY GET Requests
 	public @ResponseBody List<Event> getEvents(@RequestParam(required = false) String period,
@@ -34,7 +34,7 @@ public class EventController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd") Date toDate) {
 		List<Event> events = new ArrayList<>();
 
-		if (period != null && (size != 0 && page >= 0)) {   
+		if (period != null && (size != 0 && page >= 0)) {
 			events = eventService.getEvents(period, page, size);
 		} else if (period != null) {
 			events = eventService.getEvents(period);
@@ -51,13 +51,25 @@ public class EventController {
 		return events;
 	}
 
-	@GetMapping(path = "/{eventId}") // Map ONLY GET Requests
+	@GetMapping(path = "/{eventId}")
 	public @ResponseBody Event getEvent(@PathVariable(required = true) int eventId) {
 		return eventService.getEvent(eventId);
 	}
-	
-	@PostMapping(path = "/") // Map ONLY GET Requests
+
+	@PostMapping(path = "/")
 	public @ResponseBody Event createEvent(@RequestBody EventVO eventVO) {
 		return eventService.createEvent(eventVO);
+	}
+
+	@PutMapping(path = "/{eventId}/images")
+	public @ResponseBody String updateEventImages(@RequestBody List<String> eventImageUrls,
+			@PathVariable(required = true) int eventId) {
+		return eventService.updateEventImages(eventImageUrls, eventId);
+	}
+
+	@PutMapping(path = "/{eventId}/videos")
+	public @ResponseBody String updateEventVideos(@RequestBody List<String> eventVideoUrls,
+			@PathVariable(required = true) int eventId) {
+		return eventService.updateEventVideos(eventVideoUrls, eventId);
 	}
 }

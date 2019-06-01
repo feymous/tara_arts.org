@@ -27,4 +27,8 @@ public interface EventService {
 
 	Event createEvent(EventVO eventVO);
 
+	String updateEventImages(List<String> eventImageUrls, int eventId);
+
+	String updateEventVideos(List<String> eventVideoUrls, int eventId);
+
 }

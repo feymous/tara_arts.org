@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.organization.tara.entities.Event;
 import com.organization.tara.entities.Image;
+import com.organization.tara.entities.Video;
 import com.organization.tara.repository.EventRepository;
 import com.organization.tara.repository.ImageRepository;
+import com.organization.tara.repository.VideoRepository;
 import com.organization.tara.service.EventService;
 import com.organization.tara.visualobjects.EventVO;
 
@@ -19,9 +21,12 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventRepository eventRepository;
-	
+
 	@Autowired
 	private ImageRepository imageRepository;
+	
+	@Autowired
+	private VideoRepository videoRepository;
 
 	@Override
 	public List<Event> getEvents(String period) {
@@ -77,28 +82,59 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event createEvent(EventVO eventVO) {
-		// TODO Auto-generated method stub
 
 		Event event = new Event();
 		event.setName(eventVO.getEventName());
 		event.setDescription(eventVO.getDescription());
-		event.setBroucher(getImage(eventVO.getBroucherUrl(), "BroucherImage"));
+		event.setBroucher(createImage(eventVO.getBroucherUrl(), "BroucherImage", null));
 		event.setEndTime(eventVO.getEndTime());
 		event.setGuidelines(eventVO.getGuidelines());
 		event.setRegistrationOpen(eventVO.isRegistrationOpen());
 		event.setStartTime(eventVO.getStartTime());
 		event.setVenue(eventVO.getVenue());
-		
+
 		return eventRepository.save(event);
 	}
 
-	private Image getImage(String url, String imageType) {
-		// TODO Auto-generated method stub
+	private Image createImage(String url, String imageType, Event event) {
 		Image image = new Image();
 		image.setType(imageType);
 		image.setUploadedDate(new Date());
 		image.setUrl(url);
+		image.setEvent(event);
 		return imageRepository.save(image);
+	}
+	private Video createVideo(String url, String videoType, Event event) {
+		Video video = new Video();
+		video.setType(videoType);
+		video.setUploadedDate(new Date());
+		video.setUrl(url);
+		video.setEvent(event);
+		return videoRepository.save(video);
+	}
+	@Override
+	public String updateEventImages(List<String> eventImageUrls, int eventId) {
+
+		Event event = eventRepository.getOne(eventId);
+		if (event == null)
+			return "Event:" + eventId + "doest exists";
+		for (String url : eventImageUrls) {
+			createImage(url, "EventImage", event);
+		}
+
+		return eventImageUrls.size()+" images added successfully";
+	}
+
+	@Override
+	public String updateEventVideos(List<String> eventVideoUrls, int eventId) {
+		// TODO Auto-generated method stub
+		Event event = eventRepository.getOne(eventId);
+		if (event == null)
+			return "Event:" + eventId + "doest exists";
+		for (String url : eventVideoUrls) {
+			createVideo(url, "EventVideo", event);
+		}
+		return eventVideoUrls.size()+" videos added successfully";
 	}
 
 }
