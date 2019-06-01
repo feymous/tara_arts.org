@@ -1,8 +1,10 @@
 package com.organization.tara.service;
 
-import org.springframework.stereotype.Service;
+import com.organization.tara.entities.ContactInfo;
 
-@Service
 public interface DashboardService {
 
+	void postCotactInfo(ContactInfo contactInfo);
+
+	
 }

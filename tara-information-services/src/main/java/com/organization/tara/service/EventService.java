@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.organization.tara.entities.Event;
+import com.organization.tara.visualobjects.EventVO;
 
 @Service
 public interface EventService {
@@ -21,5 +22,9 @@ public interface EventService {
 	List<Event> getEvents();
 
 	List<Event> getEvents(Date fromDate, Date toDate, int page, int size);
+
+	List<Event> getEvents(String period, int page, int size);
+
+	Event createEvent(EventVO eventVO);
 
 }

@@ -25,18 +25,16 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int eventId;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
+	
+	private String name;
 
 	@Column(length = 1000)	
 	private String description;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMdd HH:mm", timezone="IST")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="IST")
 	private Date startTime;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyyMMdd HH:mm", timezone="IST")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="IST")
 	private Date endTime;
 
 	@Column(length = 1000)

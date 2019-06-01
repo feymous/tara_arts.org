@@ -19,4 +19,16 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	
 	@Query("SELECT e FROM Event AS e where e.startTime >= :fromDate AND e.startTime <= :toDate")
 	List<Event> getEvents(@Param(value = "fromDate") Date fromDate,@Param(value = "toDate") Date toDate);
+	
+	@Query("SELECT e FROM Event AS e where e.startTime >= :currDate")
+	List<Event> getUpcomingEvents(@Param(value = "currDate") Date currDate);
+	
+	@Query("SELECT e FROM Event AS e where e.startTime <= :currDate")
+	List<Event> getPastEvents(@Param(value = "currDate") Date currDate);
+	
+	@Query("SELECT e FROM Event AS e where e.startTime >= :currDate")
+	List<Event> getUpcomingEvents(@Param(value = "currDate") Date currDate, Pageable pageable);
+	
+	@Query("SELECT e FROM Event AS e where e.startTime <= :currDate")
+	List<Event> getPastEvents(@Param(value = "currDate") Date currDate, Pageable pageable);
 }
