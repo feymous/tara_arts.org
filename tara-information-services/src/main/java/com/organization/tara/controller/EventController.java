@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.organization.tara.entities.Event;
 import com.organization.tara.service.EventService;
 import com.organization.tara.visualobjects.EventVO;
+import com.organization.tara.visualobjects.GetEventVideoVO;
+import com.organization.tara.visualobjects.PutEventVideo;
+import com.organization.tara.visualobjects.UpdateEventVideoResponseVO;
 
 @RestController
 @RequestMapping("event")
@@ -68,8 +71,20 @@ public class EventController {
 	}
 
 	@PutMapping(path = "/{eventId}/videos")
-	public @ResponseBody String updateEventVideos(@RequestBody List<String> eventVideoUrls,
+	public @ResponseBody List<UpdateEventVideoResponseVO> updateEventVideos(@RequestBody List<PutEventVideo> eventVideos,
 			@PathVariable(required = true) int eventId) {
-		return eventService.updateEventVideos(eventVideoUrls, eventId);
+		return eventService.updateEventVideos(eventVideos, eventId);
+	}
+
+	@GetMapping(path = "/{eventId}/videos")
+	public @ResponseBody List<GetEventVideoVO> getEventVideos(@RequestParam(required = false) int size,
+			@RequestParam(required = false) int page, @PathVariable(required = true) int eventId) {
+		return eventService.getEventVideos(page, size, eventId);
+	}
+
+	@GetMapping(path = "/{eventId}/images")
+	public @ResponseBody String  getEventImages(@RequestParam(required = false) int size,
+			@RequestParam(required = false) int page, @PathVariable(required = true) int eventId) {
+		return eventService.getEventImages(page, size, eventId);
 	}
 }

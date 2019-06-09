@@ -6,8 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,9 +18,8 @@ import lombok.Data;
 @Data
 public class Video {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	private int id;
+	@Column(name = "id", updatable = false, nullable = false,length = 25)
+	private String id;
 
 	private String url;
 

@@ -30,6 +30,12 @@ public class Image {
 	private Date uploadedDate;
 
 	private String type;
+	
+	private int width;
+	
+	private int height;
+	
+	private String video;
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
