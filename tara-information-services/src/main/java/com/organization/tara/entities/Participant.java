@@ -52,5 +52,5 @@ public class Participant {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "registration_id")
-	private Registration registration;
+	private Registeration registration;
 }
